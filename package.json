@@ -8,7 +8,9 @@
     "build": "webpack --mode=production",
     "start": "nodemon --inspect ./server/",
     "db:pre-migrate": "node ./database/create.js",
-    "db:seed": "npm run db:pre-migrate && node ./database/seed.js"
+    "db:seed": "npm run db:pre-migrate && node ./database/seed.js",
+    "db:sdc": "node ./SDC/db.js",
+    "db:sdc1": "node ./SDC/db1.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,11 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
+    "cli-progress": "^3.4.0",
+    "faker": "^4.1.0",
+    "mongodb": "^3.4.0",
+    "mongoose": "^5.8.1",
+    "node-fetch": "^2.6.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
