@@ -2,7 +2,7 @@ const faker = require('faker');
 const start = Date.now()
 const { Pool, Client } = require('pg')
 const pool = new Pool({
-    user: 'guest',
+    user: 'mattshin64',
     host: 'localhost',
     database: 'related',
     port: '5432'

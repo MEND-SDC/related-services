@@ -54,10 +54,19 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
                         }
                         console.log('INSERT TIME:', Date.now()-start, "ms")
                         arr = [];   
-                        collection.createIndex({ID: 1}, {unique: true}).then(()=>{console.log('INDEX TIME:', Date.now()-start, "ms")})
+                        collection.createIndex({ID: 1}, {unique: true}).then(()=>{
+                            console.log('INDEX TIME:', Date.now()-start, "ms")
+                            client.close((error, result)=>{
+                                if(error){
+                                    throw(error)
+                                } else {
+                                    console.log('CONNECTION CLOSED')
+                                }
+                            })
+                        })
                     })
                 })
             })
         })
     })
-  });
+  })
