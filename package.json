@@ -9,8 +9,9 @@
     "start": "nodemon --inspect ./server/",
     "db:pre-migrate": "node ./database/create.js",
     "db:seed": "npm run db:pre-migrate && node ./database/seed.js",
-    "db:sdc": "node ./SDC/db.js",
-    "db:sdc1": "node ./SDC/db1.js"
+    "db:sdc": "node --max-old-space-size=6144 ./SDC/db.js",
+    "db:sdc1": "node --max-old-space-size=6144 ./SDC/db1.js",
+    "db:amazon": "node --max-old-space-size=6144 ./SDC/amazon.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
     "mongodb": "^3.4.0",
     "mongoose": "^5.8.1",
     "node-fetch": "^2.6.0",
+    "pg": "^7.15.1",
+    "psql": "0.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",

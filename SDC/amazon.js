@@ -2,8 +2,8 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const faker = require('faker');
 const start = Date.now()
-let count = 1;
-MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
+let count = 1
+MongoClient.connect('mongodb://172.31.6.167', function(err, client) {
     if(err){
         throw(err);
     }
@@ -19,11 +19,11 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
     }
     function array (){
         let arr=[];
-        for(var i = (count - 1) * 2000000 + 1; i < count * 2000000 + 1; i += 1){
+        for(var i = (count - 1) * 200000 + 1; i < count * 200000 + 1; i += 1){
             arr.push({
                 ID: i, 
                 Address: faker.address.streetAddress(),
-                Region: faker.address.zipCode(),
+                Region: '93193',
                 Photos: photos()
             })
         }
@@ -48,13 +48,10 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
                     console.log('INSERT TIME:', Date.now()-start, "ms")
                     arr = [];
                     arr = array();
-                    collection.insertMany(arr, function(err){
-                        if(err){
-                            throw(err)
-                        }
+                    collection.insertMany(arr, function(){
                         console.log('INSERT TIME:', Date.now()-start, "ms")
                         arr = [];   
-                        collection.createIndex({ID: 1}, {unique: true}).then(()=>{console.log('INDEX TIME:', Date.now()-start, "ms")})
+                        collection.createIndex({ID: 1}, {unique: true}).then(()=>{console.log('INSERT TIME:', Date.now()-start, "ms")})
                     })
                 })
             })
