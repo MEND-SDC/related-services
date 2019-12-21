@@ -10,5 +10,6 @@ const pool = new Pool({
 pool.connect()
 pool.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
   console.log(err ? err.stack : res.rows[0].message) // Hello World!
+  console.log('HELLO')
   pool.end()
 })
