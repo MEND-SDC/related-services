@@ -21,7 +21,7 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
         let arr=[];
         for(var i = (count - 1) * 2000000 + 1; i < count * 2000000 + 1; i += 1){
             arr.push({
-                ID: i, 
+                _id: i, 
                 Address: faker.address.streetAddress(),
                 Region: faker.address.zipCode(),
                 Photos: photos()
@@ -54,16 +54,23 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
                         }
                         console.log('INSERT TIME:', Date.now()-start, "ms")
                         arr = [];   
-                        collection.createIndex({ID: 1}, {unique: true}).then(()=>{
-                            console.log('INDEX TIME:', Date.now()-start, "ms")
-                            client.close((error, result)=>{
-                                if(error){
-                                    throw(error)
-                                } else {
-                                    console.log('CONNECTION CLOSED')
-                                }
-                            })
+                        client.close((error)=>{
+                            if(error){
+                                throw(error)
+                            } else {
+                                console.log('CONNECTION CLOSED')
+                            }
                         })
+                        // collection.createIndex({ID: 1}, {unique: true}).then(()=>{
+                        //     console.log('INDEX TIME:', Date.now()-start, "ms")
+                        //     client.close((error, result)=>{
+                        //         if(error){
+                        //             throw(error)
+                        //         } else {
+                        //             console.log('CONNECTION CLOSED')
+                        //         }
+                        //     })
+                        // })
                     })
                 })
             })

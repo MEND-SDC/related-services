@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS related;
+DROP DATABASE related;
 
 CREATE DATABASE related;
 
@@ -12,6 +12,9 @@ CREATE TABLE regions (
 CREATE TABLE homes (
     home_id serial PRIMARY KEY,
     address varchar (50) not null,
+    rating int not null,
+    price int not null,
+    owner varchar (50) not null,
     region_id integer not null,
     CONSTRAINT homes_region_id_fkey FOREIGN KEY (region_id)
         REFERENCES regions (region_id)
