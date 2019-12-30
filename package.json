@@ -6,12 +6,12 @@
   "scripts": {
     "test": "jest --inspect=9230 --coverage",
     "build": "webpack --mode=production",
-    "start": "nodemon --inspect ./server/",
+    "start": "nodemon --inspect ./SDC/server/server.js",
     "db:pre-migrate": "node ./database/create.js",
     "db:seed": "npm run db:pre-migrate && node ./database/seed.js",
-    "db:sdc": "node --max-old-space-size=6144 ./SDC/db.js",
-    "db:sdc1": "node --max-old-space-size=6144 ./SDC/db1.js",
-    "db:amazon": "node --max-old-space-size=6144 ./SDC/amazon.js"
+    "db:sdc": "node --max-old-space-size=6144 ./SDC/MongoDB/db.js",
+    "db:sdc1": "node --max-old-space-size=6144 ./SDC/PostgreSQL/db1.js",
+    "db:amazon": "node --max-old-space-size=6144 ./SDC/MongoDB/amazon.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
+    "body-parser": "^1.19.0",
     "cli-progress": "^3.4.0",
     "faker": "^4.1.0",
     "mongodb": "^3.4.0",
