@@ -8,7 +8,6 @@ module.exports = {
                 res.status(400).send(error);
             } else {
                 res.status(200).send(data);
-                console.log(Date.now() - start)
             }
         }, req.params)
     },
@@ -19,7 +18,6 @@ module.exports = {
                 res.status(400).send(error);
             } else {
                 res.status(200).send(result);
-                console.log(Date.now() - start)
             }
         }, req.body)
     },
@@ -30,7 +28,6 @@ module.exports = {
                 res.status(400).send(error);
             } else {
                 res.status(200).send(result);
-                console.log(Date.now() - start)
             }
         }, req.params, req.body)
     },
@@ -41,7 +38,6 @@ module.exports = {
                 res.status(400).send(error);
             } else{
                 res.status(200).send(result);
-                console.log(Date.now() - start)
             }
         }, req.params)
     },
@@ -51,7 +47,6 @@ module.exports = {
            if(error){
                res.status(400).send(error);
            } else {
-            console.log(Date.now() - start)
             res.status(200).send(data);
            }
        }, req.params)

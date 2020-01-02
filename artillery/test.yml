@@ -1,0 +1,15 @@
+config:
+    target: "http://localhost:3003"
+    phases:
+        - duration: 180
+          arrivalRate: 10
+          rampTo: 400
+    payload:
+        path: "id.csv"
+        fields:
+            - "id" 
+scenarios:
+    - flow:
+        - get:
+            url: "/api/related/{{ id }}/get"
+            

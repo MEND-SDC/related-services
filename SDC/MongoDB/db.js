@@ -23,7 +23,7 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
             arr.push({
                 _id: i, 
                 Address: faker.address.streetAddress(),
-                Region: faker.address.zipCode(),
+                Region: faker.random.number({min: 1, max: 53}),
                 Photos: photos()
             })
         }
@@ -32,7 +32,10 @@ MongoClient.connect('mongodb://127.0.0.1', function(err, client) {
         return arr;
     }
     let arr = array()
-    collection.insertMany(arr, function(){
+    collection.insertMany(arr, function(err){
+        if(err){
+            throw(err);
+        }
         console.log('INSERT TIME:', Date.now()-start, "ms")
         arr = [];
         arr = array();

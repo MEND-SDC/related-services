@@ -1,7 +1,8 @@
 const { Pool } = require('pg')
 const pool = new Pool({
-    user: 'mattshin64',
-    host: 'localhost',
+    user: 'ec2-user',
+    password: 'yourpassword',
+    host: '13.52.215.2',
     database: 'related',
     port: '5432'
 })
@@ -13,13 +14,12 @@ module.exports = {
             if(err){
                 callback(err, null)
             } else {
-                console.log(data.rows[0]);
+                console.log(data);
                 callback(null, data.rows[0])
             }
         })
     },
     post: (callback, data) => {
-        console.log(data)
         pool.query(`Insert into homes (address, rating, price, owner, region_id) values ('${data.address}', ${data.rating}, ${data.price}, '${data.owner}', ${data.region_id})`, (err, results) => {
             if(err){
                 console.log(err)
@@ -32,10 +32,8 @@ module.exports = {
     },
     update: (callback, id, data) => {
         let homeID = id.houseID
-        console.log(data)
-        let query = `Update homes set address = '${data.address}', rating = ${data.rating}, price = ${data.price}, owner = '${data.owner}', region_id = ${data.region_id} where home_id = ${homeID}`
+        let query = `Update homes set address = '${data.address}', owner = '${data.owner}', region_id = ${data.region_id} where home_id = ${homeID}`
         pool.query(query, (err, result) => {
-            console.log('Hi')
             if(err){
                 callback(err, null)
             } else {
@@ -50,7 +48,6 @@ module.exports = {
                 console.log(err)
                 callback(err, null)
             } else {
-                console.log(results)
                 callback(null, results)
             }
         })
@@ -61,7 +58,7 @@ module.exports = {
             if(err){
                 callback(err, null)
             } else {
-                console.log(results.rows.length)
+                callback(null, results)
             }
         })
     }

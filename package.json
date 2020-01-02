@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --inspect=9230 --coverage",
+    "test": "node ./SDC/PostgreSQL/test.js",
     "build": "webpack --mode=production",
-    "start": "nodemon --inspect ./SDC/server/server.js",
+    "start": "node ./SDC/server/server.js",
     "db:pre-migrate": "node ./database/create.js",
     "db:seed": "npm run db:pre-migrate && node ./database/seed.js",
     "db:sdc": "node --max-old-space-size=6144 ./SDC/MongoDB/db.js",
     "db:sdc1": "node --max-old-space-size=6144 ./SDC/PostgreSQL/db1.js",
-    "db:amazon": "node --max-old-space-size=6144 ./SDC/MongoDB/amazon.js"
+    "db:amazon": "node --max-old-space-size=6144 ./SDC/MongoDB/amazon.js",
+    "art:seed": "node --max-old-space-size=6144 ./artillery/artseed.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "faker": "^4.1.0",
     "mongodb": "^3.4.0",
     "mongoose": "^5.8.1",
+    "newrelic": "^6.2.0",
     "node-fetch": "^2.6.0",
     "pg": "^7.15.1",
     "psql": "0.0.1",
