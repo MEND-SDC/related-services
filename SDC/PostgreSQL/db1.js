@@ -3,17 +3,16 @@ const start = Date.now()
 const { Pool } = require('pg')
 const fs = require('fs')
 const path = require('path')
-const states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PW','PA','RI','SC','SD','TN','TX','UT','VT','VI','VA','WA','WV','WI','WY']
+const states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 const pool = new Pool({
     user: 'mattshin64',
-    password: 'yourpassword',
     host: 'localhost',
     database: 'related',
     port: '5432'
 })
 function createRegion (){
     let string = ''
-    for(var i = 0; i <= 53; i++){
+    for(var i = 0; i <= 49; i++){
         string += i+1
         string += ','
         string += states[i] 
@@ -39,39 +38,96 @@ function createPhoto (num){
     return string
 }
 
-function createHome (num){
+function createHome1 (num){
     let string = ''
-    console.log('starting')
-    for(var i = num; i <= num+2499999; i++){
+    let number = Math.round(num/200000) + 1
+    console.log(number, number + 9)
+    for(var i = num; i <= num+1999999; i++){
         string += i
         string += ','
         string += faker.address.streetAddress()
         string += ','
         string += faker.lorem.words()
         string += ','
-        string += faker.finance.amount(2, 5, 2)
+        string += faker.finance.amount(3, 5, 2)
         string += ','
         string += faker.random.number({min: 1, max: 500})
         string += ','
         string += faker.random.number({min: 60, max: 400})
         string += ','
-        string += faker.random.number({min: 1, max: 9})
+        string += faker.random.number({min: 1, max: 8})
         string += ','
         string += faker.name.findName()
         string += ','
         string += faker.random.number({min: 0, max: 1})
         string += ','
-        string += faker.random.number({min: 1, max: 54})
+        string += faker.random.number({min: number, max: number + 9})
         string += '\n' 
     }
     console.log('DONE WITH STRING')
     return string
 }
-fs.writeFile('./csv/photo5.csv', createPhoto(8000001), (err)=>{
+//Writing Home CSV files
+// fs.writeFile('./csv/home1.csv', createHome1(1), (err)=>{
+//     if(err){
+//         throw err;
+//     }
+//     console.log('DONE WITH home1')
+//     fs.writeFile('./csv/home2.csv', createHome1(2000001), (err)=>{
+//         if(err){
+//             throw err;
+//         }
+//         console.log('DONE WITH home2')
+//         fs.writeFile('./csv/home3.csv', createHome1(4000001), (err)=>{
+//             if(err){
+//                 throw err;
+//             }
+//             console.log('DONE WITH home3')
+//             fs.writeFile('./csv/home4.csv', createHome1(6000001), (err)=>{
+//                 if(err){
+//                     throw err;
+//                 }
+//                 console.log('DONE WITH home4')
+//                 fs.writeFile('./csv/home5.csv', createHome1(8000001), (err)=>{
+//                     if(err){
+//                         throw err;
+//                     }
+//                     console.log('DONE WITH home5')
+//                 });
+//             });
+//         });
+//     });
+// });
+//Writing photos csv files
+fs.writeFile('./csv/photo1.csv', createPhoto(1), (err)=>{
     if(err){
         throw err;
     }
-    console.log('DONE WITH Photo5')
+    console.log('DONE WITH photo1')
+    fs.writeFile('./csv/photo2.csv', createPhoto(2000001), (err)=>{
+        if(err){
+            throw err;
+        }
+        console.log('DONE WITH photo2')
+        fs.writeFile('./csv/photo3.csv', createPhoto(4000001), (err)=>{
+            if(err){
+                throw err;
+            }
+            console.log('DONE WITH photo3')
+            fs.writeFile('./csv/photo4.csv', createPhoto(6000001), (err)=>{
+                if(err){
+                    throw err;
+                }
+                console.log('DONE WITH photo4')
+                fs.writeFile('./csv/photo5.csv', createPhoto(8000001), (err)=>{
+                    if(err){
+                        throw err;
+                    }
+                    console.log('DONE WITH photo5')
+                });
+            });
+        });
+    });
 });
 
 // fs.writeFile('./csv/region.csv', createRegion(), (err)=> {

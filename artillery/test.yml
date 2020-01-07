@@ -1,9 +1,9 @@
 config:
     target: "http://localhost:3003"
     phases:
-        - duration: 180
+        - duration: 240
           arrivalRate: 10
-          rampTo: 400
+          rampTo: 300
     payload:
         path: "id.csv"
         fields:
@@ -11,5 +11,5 @@ config:
 scenarios:
     - flow:
         - get:
-            url: "/api/related/{{ id }}/get"
+            url: "/api/related/{{ id }}"
             

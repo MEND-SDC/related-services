@@ -2,10 +2,11 @@ const { Pool } = require('pg')
 const pool = new Pool({
     user: 'ec2-user',
     password: 'yourpassword',
-    host: '13.52.215.2',
+    host: '172.31.15.104',
     database: 'related',
     port: '5432'
 })
+let current = {};
 
 module.exports = {
     get: (callback, id) => {
@@ -14,7 +15,8 @@ module.exports = {
             if(err){
                 callback(err, null)
             } else {
-                console.log(data);
+                current = data.rows[0]
+                console.log(current)
                 callback(null, data.rows[0])
             }
         })
@@ -54,11 +56,12 @@ module.exports = {
     },
     getAll: (callback, id) => {
         let homeID = id.houseID
-        pool.query(`select * from homes where region_id = (select region_id from homes where home_id = ${homeID})`, (err, results) => {
+        pool.query(`select * from homes where region_id = (select region_id from homes where home_id = ${homeID}) and rating > 4.5 and price < 200 limit 12;`, (err, results) => {
             if(err){
                 callback(err, null)
             } else {
-                callback(null, results)
+                console.log(results.rowCount)
+                callback(null, results.rows)
             }
         })
     }

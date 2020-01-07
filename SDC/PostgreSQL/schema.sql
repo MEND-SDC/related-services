@@ -15,6 +15,8 @@ CREATE TABLE homes (
     title varchar (50) not null, 
     rating decimal not null,
     rating_num int not null, 
+    -- rating_index float(6) GENERATED ALWAYS AS ((rating - 3) * rating_num / 1000) STORED,
+    -- value_per_person float(6) GENERATED ALWAYS AS (price/guests) STORED,
     price int not null,
     guests int not null, 
     owner varchar (50) not null,
@@ -39,4 +41,5 @@ create index rating_index on homes (rating);
 create index ratingnum_index on homes (rating_num);
 create index price_index on homes (price);
 create index guests_index on homes (guests);
+-- create index ratingindex_index on homes (rating_index);
 
