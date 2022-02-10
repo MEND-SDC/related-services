@@ -58,7 +58,7 @@
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.2",
     "mysql2": "^2.0.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.1",
     "react-addons-test-utils": "^15.6.2",
     "sass-loader": "^8.0.0",
